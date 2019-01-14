@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="keys">
+        <div class="key" data-key="65"><kbd>A</kbd></div>
+        <div class="key" data-key="83"><kbd>S</kbd></div>
+        <div class="key" data-key="68"><kbd>D</kbd></div>
+        <div class="key" data-key="70"><kbd>F</kbd></div>
+        <div class="key" data-key="71"><kbd>G</kbd></div>
+        <div class="key" data-key="72"><kbd>H</kbd></div>
+        <div class="key" data-key="74"><kbd>J</kbd></div>
+        <div class="key" data-key="75"><kbd>K</kbd></div>
+        <div class="key" data-key="76"><kbd>L</kbd></div>
+    </div>
+
+    <audio data-key="65" src="./audios/big-burundi-01.wav"></audio>
+    <audio data-key="83" src="./audios/big-burundi-02.wav"></audio>
+    <audio data-key="68" src="./audios/big-burundi-03.wav"></audio>
+    <audio data-key="70" src="./audios/big-burundi-04.wav"></audio>
+    <audio data-key="71" src="./audios/big-burundi-05.wav"></audio>
+    <audio data-key="72" src="./audios/big-burundi-06.wav"></audio>
+    <audio data-key="74" src="./audios/big-burundi-07.wav"></audio>
+    <audio data-key="75" src="./audios/big-burundi-08.wav"></audio>
+    <audio data-key="76" src="./audios/big-burundi-09.wav"></audio>
+
+
+    <script>
+        function playSound(e) {
+            const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+            const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+            // console.log(audio);
+            // console.log(e.keyCode);
+            if (!audio) return; // stop the function from all together
+
+
+            audio.currentTime = 0; // renew to the start
+            audio.play(); // Play audio
+
+            key.classList.add('playing');
+        }
+
+
+        function removeTransition(e) {
+            // console.log(e);
+            if (e.propertyName !== 'transform') return;
+            // console.log(e.propertyName);
+            this.classList.remove('playing');
+        }
+
+        const key = document.querySelectorAll('.key');
+        key.forEach((key) => key.addEventListener('transitionend', removeTransition));
+
+        window.addEventListener('keydown', playSound);
+        // window.addEventListener('keyup', function(e){
+        //     const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+        //     key.classList.remove('playing');
+        // })
+    </script>
+
+</body>
+
+</html>
