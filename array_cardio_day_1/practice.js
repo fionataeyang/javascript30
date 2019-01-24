@@ -12,3 +12,22 @@ function findItem(quantity, price, arr) {
 }
 
 console.table( findItem(50, 2, [...fruits] ));
+
+
+const buyFruits = [
+    {id: 1, fruit: 'apple', quantity: 15, price: 20},
+    {id: 2, fruit: 'kiwi', quantity: 5, price: 10},
+    {id: 3, fruit: 'banana', quantity: 6, price: 12},
+    {id: 4, fruit: 'stawberry', quantity: 25, price: 100}
+]
+
+const myfruits = buyFruits.map( buy => { return {name: buy.fruit, price: buy.price} } );
+const filter = myfruits.filter( item => item.name === 'apple')
+const reduce = buyFruits.reduce( (a, b) => a.quantity > b.fruit.quantity ? {name: a.fruit, price: a.price} : {name: b.fruit, price: b.price} );
+const sortPrice = myfruits.sort( (a , b) => a.price < b.price ? 1 : -1 );
+const amount = myfruits.reduce( (total, next) => { return total + next.price }, 0); // total is undefined, so we need to add zero in the end.
+console.log(myfruits);
+console.log(filter);
+console.log(reduce);
+console.log(sortPrice);
+console.log(amount);
